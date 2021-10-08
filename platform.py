@@ -6,7 +6,7 @@
 from platform import system
 from platformio.managers.platform import PlatformBase
 
-class MT2502Platform(PlatformBase):
+class Mt2502Platform(PlatformBase):
     def configure_default_packages(self, variables, target):
         
         # configure script based on MCU type
