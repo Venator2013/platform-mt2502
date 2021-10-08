@@ -6,7 +6,6 @@
 		"mcu": "MT2502",
 		"variant": "rephone",
 		"newlib": "nano",
-		"logicromtype": "release",
 		"extra_flags": "-DPLATFORM_REPHONE=1",
 		"hwids": [
 			[

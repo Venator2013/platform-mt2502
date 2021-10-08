@@ -128,7 +128,7 @@ env.Append(
     ],
 
     LIBPATH=[
-        join(FRAMEWORK_DIR, "cores", board.get("build.core"), "logicromsdk", "lib")
+        join(FRAMEWORK_DIR, "cores", board.get("build.core"), "mtk", "lib")
     ],
 
     LIBS=[
@@ -210,18 +210,6 @@ if board.get("build.mcu") != "MT2625" and board.get("build.newlib") == "nano":
 
 # copy CCFLAGS to ASFLAGS (-x assembler-with-cpp mode)
 env.Append(ASFLAGS=env.get("CCFLAGS", [])[:])
-
-def load_logicrom_debug():
-    for i, libs in enumerate(env["LIBS"]):
-        if libs.startswith("logicrom") or libs.startswith("logicromnbiot"):
-            env["LIBS"][i] = libs + "_debug"
-
-
-if board.get("build.logicromtype") == "debug":
-    load_logicrom_debug()
-
-if env.GetBuildType() == "debug":
-    load_logicrom_debug()
 
 #
 # Target: Build Core Library
