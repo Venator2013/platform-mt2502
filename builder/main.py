@@ -65,20 +65,14 @@ if env.get("PROGNAME", "program") == "program":
 # Target: Build executable and linkable firmware
 #
 
-if board.get("build.mcu") == "RDA8910":
-    env.Replace(TARGETSUFFIX=".pac")
-
 target_elf = None
 if "nobuild" in COMMAND_LINE_TARGETS:
     target_elf = join("$BUILD_DIR", "${PROGNAME}.elf")
     target_firm = join("$BUILD_DIR", "${PROGNAME}.${TARGETSUFFIX}")
-    target_firm_fota = join("$BUILD_DIR", "fota_${PROGNAME}.${TARGETSUFFIX}")
     target_upload = target_firm
 else:
     target_elf = env.BuildProgram()
     target_firm = env.ElfToBin(join("$BUILD_DIR", "${PROGNAME}"), target_elf)
-    target_firm_fota = env.BinToFOTA(
-        join("$BUILD_DIR", "fota_${PROGNAME}"), target_firm)
     target_upload = target_firm
 
 if board.get("build.mcu") == "RDA8910":
@@ -88,12 +82,6 @@ if board.get("build.mcu") == "RDA8910":
 AlwaysBuild(env.Alias("nobuild", target_firm))
 target_buildprog = env.Alias("buildprog", target_firm, target_firm)
 
-#
-# Target: Build FOTA Binary
-#
-
-target_buildota = env.Alias("buildfota", target_firm_fota, target_firm_fota)
-AlwaysBuild(target_buildota)
 
 #
 # Target: Print binary size
@@ -154,4 +142,4 @@ AlwaysBuild(env.Alias("upload", upload_source, upload_actions))
 # Setup default targets
 #
 
-Default([target_buildprog, target_buildota, target_size])
+Default([target_buildprog, target_size])
