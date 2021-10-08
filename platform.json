@@ -1,0 +1,46 @@
+{
+	"name": "mt2502",
+	"title": "MT2502",
+	"description": "Ultra-small and highly integrated ARMv7-based chip with connectivity for wearable applications.",
+	"url": "https://www.mediatek.com/products/wearables/mt2502",
+	"homepage": "https://www.mediatek.com/products/wearables/mt2502",
+	"license": "MIT",
+	"keywords": [
+		"dev-platform",
+		"MT2502",
+		"RePhone"
+	],
+	"engines": {
+		"platformio": "^5"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Venator2013/platform-mt2502.git"
+	},
+	"version": "0.0.1",
+	"vendor": "",
+	"frameworks": {
+		"arduino": {
+			"package": "framework-mt2502arduino",
+			"script": "builder/framework/arduino.py",
+			"description": "Arduino Wiring-based Framework For MT2502 Platform",
+			"homepage": "https://github.com/waybyte/Arduino_LogicROM",
+			"title": "Arduino Framework"
+		}
+	},
+	"packages": {
+		"toolchain-gccarmnoneeabi": {
+			"type": "toolchain",
+			"owner": "platformio",
+			"version": "~1.80201.0"
+		},
+		"framework-mt2502arduino": {
+			"type": "framework",
+			"optional": true,
+			"version": "~0.0.1"
+		}
+	},
+	"pythonPackages": {
+		"pyserial": ">=3.4"
+	}
+}

@@ -1,0 +1,34 @@
+{
+	"build": {
+		"core": "logicrom",
+		"cpu": "arm7tdmi-s",
+		"f_cpu": "260000000L",
+		"mcu": "MT2502",
+		"variant": "rephone",
+		"newlib": "nano",
+		"logicromtype": "release",
+		"extra_flags": "-DPLATFORM_REPHONE=1",
+		"hwids": [
+			[
+				"0x0E8D",
+				"0x0003"
+			]
+		]
+	},
+	"connectivity": [
+		"gsm",
+		"bluetooth"
+	],
+	"frameworks": [
+		"arduino"
+	],
+	"name": "Rephone core 2G MT2502",
+	"upload": {
+		"maximum_ram_size": 96256,
+		"maximum_size": 10485760,
+		"require_upload_port": true,
+		"speed": 460800
+	},
+	"url": "",
+	"vendor": ""
+}
