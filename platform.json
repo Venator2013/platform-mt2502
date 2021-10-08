@@ -25,6 +25,7 @@
 			"script": "builder/framework/arduino.py",
 			"description": "Arduino Wiring-based Framework For MT2502 Platform",
 			"homepage": "https://github.com/Venator2013/arduino_mt2502",
+			"url": "https://github.com/Venator2013/arduino_mt2502.git",
 			"title": "Arduino Framework"
 		}
 	},
