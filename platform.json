@@ -24,7 +24,7 @@
 			"package": "framework-mt2502arduino",
 			"script": "builder/framework/arduino.py",
 			"description": "Arduino Wiring-based Framework For MT2502 Platform",
-			"homepage": "https://github.com/waybyte/Arduino_LogicROM",
+			"homepage": "https://github.com/Venator2013/arduino_mt2502",
 			"title": "Arduino Framework"
 		}
 	},
