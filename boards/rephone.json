@@ -1,6 +1,6 @@
 {
 	"build": {
-		"core": "logicrom",
+		"core": "mt2502",
 		"cpu": "arm7tdmi-s",
 		"f_cpu": "260000000L",
 		"mcu": "MT2502",
