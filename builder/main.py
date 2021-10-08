@@ -12,7 +12,7 @@ from SCons.Script import (COMMAND_LINE_TARGETS, AlwaysBuild,
 env = DefaultEnvironment()
 platform = env.PioPlatform()
 board = env.BoardConfig()
-flasher_path = platform.get_package_dir("tool-logicromflasher") or ""
+#flasher_path = platform.get_package_dir("tool-logicromflasher") or ""
 
 def _get_board_mcu():
     return board.get("build.mcu")
@@ -41,21 +41,21 @@ env.Replace(
 )
 
 # Setup tools based on system type
-if "windows" in get_systype() and board.get("build.mcu") in ["MT2502"]:
-    env.Replace(
-        LOGICROM_FLASHER=join(flasher_path, "logicromflasher"),
-        REFLASH_FLAGS=[
-            "-r",
-            "-b", "$UPLOAD_SPEED",
-            "-p", '"$UPLOAD_PORT"',
-        ],
-        REFLASH_CMD='"$LOGICROM_FLASHER" $REFLASH_FLAGS'
-    )
-else:
-    env.Replace(
-        LOGICROM_FLASHER='"$PYTHONEXE" ' + join(flasher_path, "logicromflasher.py"),
-        REFLASH_CMD='echo "Sorry! Reflashing is only supported on windows! :("'
-    )
+# if "windows" in get_systype() and board.get("build.mcu") in ["MT2502"]:
+#     env.Replace(
+#         LOGICROM_FLASHER=join(flasher_path, "logicromflasher"),
+#         REFLASH_FLAGS=[
+#             "-r",
+#             "-b", "$UPLOAD_SPEED",
+#             "-p", '"$UPLOAD_PORT"',
+#         ],
+#         REFLASH_CMD='"$LOGICROM_FLASHER" $REFLASH_FLAGS'
+#     )
+# else:
+#     env.Replace(
+#         LOGICROM_FLASHER='"$PYTHONEXE" ' + join(flasher_path, "logicromflasher.py"),
+#         REFLASH_CMD='echo "Sorry! Reflashing is only supported on windows! :("'
+#     )
 
 # Allow user to override via pre:script
 if env.get("PROGNAME", "program") == "program":
