@@ -4,7 +4,7 @@
 		"cpu": "arm7tdmi-s",
 		"f_cpu": "260000000L",
 		"mcu": "MT2502",
-		"variant": "rephone",
+		"variant": "linkit_one",
 		"newlib": "nano",
 		"extra_flags": "-DPLATFORM_REPHONE=1",
 		"hwids": [
