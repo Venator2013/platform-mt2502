@@ -111,6 +111,7 @@ env.Append(
 
     CPPPATH=[
         join(FRAMEWORK_DIR, "cores", board.get("build.core"), "mtk", "include"),
+        join(FRAMEWORK_DIR, "cores", board.get("build.core"), "mtk"),
         join(FRAMEWORK_DIR, "cores", board.get("build.core"))
     ],
 
