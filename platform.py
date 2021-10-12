@@ -16,7 +16,7 @@ class Mt2502Platform(PlatformBase):
         
         frameworks = variables.get("pioframework", [])
         if "arduino" in frameworks:
-            self.frameworks["arduino"]["package"] = "framework-arduinoststm32l0"
+            self.frameworks["arduino"]["package"] = "framework-mt2502arduino"
             self.packages["framework-mt2502arduino"]["optional"] = False
             self.packages["framework-mt2502arduino"]["optional"] = True
 
