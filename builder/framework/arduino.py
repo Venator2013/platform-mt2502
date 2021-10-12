@@ -28,6 +28,7 @@ board = env.BoardConfig()
 FRAMEWORK_DIR = platform.get_package_dir("framework-mt2502arduino")
 assert isdir(FRAMEWORK_DIR)
 
+
 def gen_bin_file(target, source, env):
     cmd = ["$OBJCOPY"]
     (target_firm, ) = target
@@ -70,6 +71,7 @@ def gen_bin_file(target, source, env):
         out_firm.close()
         remove(temp_firm)
 
+
 # Setup ENV
 env.Append(
     ASFLAGS=["-x", "assembler-with-cpp"],
@@ -88,7 +90,7 @@ env.Append(
 
     CFLAGS=[
         "-std=gnu11",
-		"-Wno-old-style-declaration"
+        "-Wno-old-style-declaration"
     ],
 
     CXXFLAGS=[
@@ -103,14 +105,16 @@ env.Append(
         ("__BUFSIZ__", "512"),
         ("__FILENAME_MAX__", "256"),
         ("F_CPU", "$BOARD_F_CPU"),
-		("ARDUINO", 10813),
-		"ARDUINO_ARCH_ARM",
-        ("ARDUINO_VARIANT", '\\"%s\\"' % board.get("build.variant").replace('"', "")),
+        ("ARDUINO", 10813),
+        "ARDUINO_ARCH_ARM",
+        ("ARDUINO_VARIANT", '\\"%s\\"' %
+         board.get("build.variant").replace('"', "")),
         ("ARDUINO_BOARD", '\\"%s\\"' % board.get("name").replace('"', ""))
     ],
 
     CPPPATH=[
-        join(FRAMEWORK_DIR, "cores", board.get("build.core"), "mtk", "include"),
+        join(FRAMEWORK_DIR, "cores", board.get(
+            "build.core"), "mtk", "include"),
         join(FRAMEWORK_DIR, "cores", board.get("build.core"), "mtk"),
         join(FRAMEWORK_DIR, "cores", board.get("build.core"))
     ],
@@ -125,7 +129,8 @@ env.Append(
         "-nostartfiles",
         "-nodefaultlibs",
         "-u", "main",
-        "-Wl,--defsym,platform_init=platform_%s_init" % board.get("build.variant")
+        "-Wl,--defsym,platform_init=platform_%s_init" % board.get(
+            "build.variant")
     ],
 
     LIBPATH=[
@@ -152,7 +157,7 @@ env.Append(
 )
 
 
-#Flags specific to MT2503/MT6261
+# Flags specific to MT2503/MT6261
 env.Prepend(
     CCFLAGS=[
         "-march=armv5te",
@@ -171,7 +176,7 @@ env.Prepend(
 )
 
 
-if board.get("build.mcu") != "MT2625" and board.get("build.newlib") == "nano":
+if board.get("build.newlib") == "nano":
     env.Append(
         LINKFLAGS=[
             "--specs=nano.specs",
