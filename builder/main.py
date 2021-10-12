@@ -1,7 +1,3 @@
-# Copyright 2021 WAYBYTE Solutions
-#
-# SPDX-License-Identifier: MIT
-#
 
 from platformio.util import get_systype
 from os.path import join
@@ -12,10 +8,11 @@ from SCons.Script import (COMMAND_LINE_TARGETS, AlwaysBuild,
 env = DefaultEnvironment()
 platform = env.PioPlatform()
 board = env.BoardConfig()
-#flasher_path = platform.get_package_dir("tool-logicromflasher") or ""
+
 
 def _get_board_mcu():
     return board.get("build.mcu")
+
 
 env.Replace(
     __get_board_mcu=_get_board_mcu,
@@ -40,23 +37,6 @@ env.Replace(
     TARGETSUFFIX=".bin"
 )
 
-# Setup tools based on system type
-# if "windows" in get_systype() and board.get("build.mcu") in ["MT2502"]:
-#     env.Replace(
-#         LOGICROM_FLASHER=join(flasher_path, "logicromflasher"),
-#         REFLASH_FLAGS=[
-#             "-r",
-#             "-b", "$UPLOAD_SPEED",
-#             "-p", '"$UPLOAD_PORT"',
-#         ],
-#         REFLASH_CMD='"$LOGICROM_FLASHER" $REFLASH_FLAGS'
-#     )
-# else:
-#     env.Replace(
-#         LOGICROM_FLASHER='"$PYTHONEXE" ' + join(flasher_path, "logicromflasher.py"),
-#         REFLASH_CMD='echo "Sorry! Reflashing is only supported on windows! :("'
-#     )
-
 # Allow user to override via pre:script
 if env.get("PROGNAME", "program") == "program":
     env.Replace(PROGNAME="firmware")
@@ -74,10 +54,6 @@ else:
     target_elf = env.BuildProgram()
     target_firm = env.ElfToBin(join("$BUILD_DIR", "${PROGNAME}"), target_elf)
     target_upload = target_firm
-
-if board.get("build.mcu") == "RDA8910":
-    target_upload = join("$BUILD_DIR", "${PROGNAME}.img")
-    env.Depends(target_upload, target_firm)
 
 AlwaysBuild(env.Alias("nobuild", target_firm))
 target_buildprog = env.Alias("buildprog", target_firm, target_firm)
@@ -119,13 +95,6 @@ for args in env.get("UPLOAD_EXTRA_ARGS", []):
 upload_source = target_upload
 upload_actions = [env.VerboseAction("$UPLOADCMD", "Uploading $SOURCE")]
 
-if board.get("build.mcu") not in ["MT2502"]:
-    env.Prepend(
-        UPLOADERFLAGS=[
-            "-m", '"${__get_board_mcu()}"',
-        ]
-    )
-
 if env.subst("$UPLOAD_PORT") == "":
     if "windows" in get_systype() and board.get("build.mcu") in ["MT2502"]:
         env.Prepend(
@@ -134,7 +103,7 @@ if env.subst("$UPLOAD_PORT") == "":
         )
     elif board.get("build.mcu") != "RDA8910":
         upload_actions.insert(0, env.VerboseAction(env.AutodetectUploadPort,
-            "Looking for upload port..."))
+                                                   "Looking for upload port..."))
 
 AlwaysBuild(env.Alias("upload", upload_source, upload_actions))
 
