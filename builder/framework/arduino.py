@@ -151,53 +151,25 @@ env.Append(
     )
 )
 
-if board.get("build.mcu") != "MT2625":
-    #Flags specific to MT2503/MT6261
-    env.Prepend(
-        CCFLAGS=[
-            "-march=armv5te",
-            "-mfloat-abi=soft",
-        ],
 
-        LINKFLAGS=[
-            "-march=armv5te",
-            "-mfloat-abi=soft",
-            "-T", "linkerscript.ld",
-        ],
+#Flags specific to MT2503/MT6261
+env.Prepend(
+    CCFLAGS=[
+        "-march=armv5te",
+        "-mfloat-abi=soft",
+    ],
 
-        LIBS=[
-            "mtk",
-        ],
-    )
-else:
-    #Flags specific to MT2625
-    env.Prepend(
-        CCFLAGS=[
-            "-mcpu=cortex-m4",
-            "-mfloat-abi=hard",
-            "-mfpu=fpv4-sp-d16",
-            "-mno-unaligned-access",
-        ],
+    LINKFLAGS=[
+        "-march=armv5te",
+        "-mfloat-abi=soft",
+        "-T", "linkerscript.ld",
+    ],
 
-        CPPDEFINES=[
-            ("PLATFORM_NBIOT", 1),
-            ("_REENT_SMALL"),
-        ],
+    LIBS=[
+        "mtk",
+    ],
+)
 
-        LINKFLAGS=[
-            "-mcpu=cortex-m4",
-            "-mfloat-abi=hard",
-            "-mfpu=fpv4-sp-d16",
-            "-mno-unaligned-access",
-            "-T", "linkerscript_nbiot.ld",
-            "--specs=nano.specs",
-            "--specs=nosys.specs",
-        ],
-
-        LIBS=[
-            "logicromnbiot",
-        ],
-    )
 
 if board.get("build.mcu") != "MT2625" and board.get("build.newlib") == "nano":
     env.Append(
