@@ -37,7 +37,6 @@
 		},
 		"framework-mt2502arduino": {
 			"type": "framework",
-			"optional": true,
 			"version": "~0.0.1"
 		}
 	},
