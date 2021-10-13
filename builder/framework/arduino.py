@@ -155,12 +155,12 @@ env.Append(
 # Flags specific to MT2503/MT6261
 env.Prepend(
     CCFLAGS=[
-        "-march=arm7tdmi-s",
+        "-mcpu=arm7tdmi-s",
         "-mfloat-abi=soft",
     ],
 
     LINKFLAGS=[
-        "-march=arm7tdmi-s",
+        "-mcpu=arm7tdmi-s",
         "-mfloat-abi=soft",
         "-T", "linkerscript.ld",
     ],
