@@ -169,7 +169,7 @@ env.Prepend(
 )
 
 
-if board.get("build.mcu") != "MT2625" and board.get("build.newlib") == "nano":
+if board.get("build.newlib") == "nano":
     env.Append(
         LINKFLAGS=[
             "--specs=nano.specs",
