@@ -24,7 +24,7 @@ FRAMEWORK_DIR = platform.get_package_dir("framework-mt2502arduino")
 assert isdir(FRAMEWORK_DIR)
 
 
-def gen_bin_file(target, source, env):
+def gen_vpx_file(target, source, env):
     cmd = ["$OBJCOPY"]
     (target_firm, ) = target
     (target_elf, ) = source
@@ -143,8 +143,8 @@ env.Append(
 
     BUILDERS=dict(
         ElfToBin=Builder(
-            action=env.VerboseAction(gen_bin_file, "Generating $TARGET"),
-            suffix=".bin"
+            action=env.VerboseAction(gen_vpx_file, "Generating $TARGET"),
+            suffix=".vpx"
         )
     )
 )
