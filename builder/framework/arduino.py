@@ -93,7 +93,6 @@ env.Append(
         "-fno-rtti",
         "-fno-exceptions",
         "-fno-use-cxa-atexit",
-        "-fno-threadsafe-statics",
         "-fno-non-call-exceptions"
     ],
 
