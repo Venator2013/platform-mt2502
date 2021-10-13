@@ -40,12 +40,11 @@ def gen_vpx_file(target, source, env):
             # append 0xff
             out_firm.write(b'\xff')
 
-            firm_size = getsize(target_firm.get_abspath())
+            firm_size = out_firm.tell()
             print('Size of the ELF File:    %d' % firm_size)
             # align with 0x30
             while firm_size & 0x3:
                 out_firm.write(b'\x30')
-                print(b'\x30')
                 firm_size += 1
 
             # add elf file length information
