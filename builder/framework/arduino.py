@@ -205,19 +205,6 @@ if "build.variant" in env.BoardConfig():
         join(variants_dir, env.BoardConfig().get("build.variant"))
     ))
 
-
-# if "build.variant" in env.BoardConfig():
-#     env.Append(
-#         CPPPATH=[
-#             join(FRAMEWORK_DIR, "variants",
-#                  env.BoardConfig().get("build.variant"))
-#         ]
-#     )
-#     libs.append(env.BuildLibrary(
-#         join("$BUILD_DIR", "FrameworkArduinoVariant"),
-#         join(FRAMEWORK_DIR, "variants", board.get("build.variant"))
-#     ))
-
 envsafe = env.Clone()
 
 libs.append(envsafe.BuildLibrary(
