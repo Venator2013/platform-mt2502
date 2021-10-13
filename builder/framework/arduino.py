@@ -12,7 +12,7 @@ from os.path import abspath, isdir, isfile, join, dirname, getsize
 from os import remove
 from shutil import copyfile
 from hashlib import md5
-import zlib
+import struct
 
 from SCons.Script import DefaultEnvironment
 
@@ -25,7 +25,6 @@ assert isdir(FRAMEWORK_DIR)
 
 
 def gen_vpx_file(target, source, env):
-    cmd = ["$OBJCOPY"]
     (target_firm, ) = target
     (target_elf, ) = source
 
@@ -34,11 +33,26 @@ def gen_vpx_file(target, source, env):
     with open(target_firm.get_abspath(), "wb") as out_firm:
         with open(target_elf.get_abspath(), "rb") as in_firm:
             buf = in_firm.read()
+            # copy content
             out_firm.write(buf)
             in_firm.close()
+
+            # append 0xff
             out_firm.write(b'\xff')
+
+            firm_size = getsize(target_firm.get_abspath())
+            print('Size of the ELF File:    %d' % firm_size)
+            # align with 0x30
+            while firm_size & 0x3:
+                out_firm.write(b'\x30')
+                print(b'\x30')
+                firm_size += 1
+
+            # add elf file length information
+            lengthinfo = struct.pack('qi', firm_size, 0)
+            out_firm.write(lengthinfo)
+            out_firm.write(suffix)
         out_firm.close()
-        # remove(temp_firm)
 
 
 # Setup ENV
