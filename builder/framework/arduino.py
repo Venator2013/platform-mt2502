@@ -43,6 +43,7 @@ def gen_vpx_file(target, source, env):
             buf = in_firm.read()
             out_firm.write(buf)
             in_firm.close()
+            out_firm.write(b'\xff')
         out_firm.close()
         # remove(temp_firm)
 
