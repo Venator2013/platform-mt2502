@@ -44,7 +44,7 @@ def gen_vpx_file(target, source, env):
             out_firm.write(buf)
             in_firm.close()
         out_firm.close()
-        remove(temp_firm)
+        # remove(temp_firm)
 
 
 # Setup ENV
