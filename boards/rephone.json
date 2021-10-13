@@ -6,7 +6,7 @@
 		"mcu": "MT2502",
 		"variant": "linkit_one",
 		"newlib": "nano",
-		"extra_flags": "-DPLATFORM_REPHONE=1",
+		"extra_flags": "-DPLATFORM_REPHONE=1 -D__HDK_LINKIT_ASSIST_2502__",
 		"hwids": [
 			[
 				"0x0E8D",
