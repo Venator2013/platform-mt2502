@@ -105,8 +105,7 @@ env.Append(
         "ARDUINO_ARCH_ARM",
         ("ARDUINO_VARIANT", '\\"%s\\"' %
          board.get("build.variant").replace('"', "")),
-        ("ARDUINO_BOARD", '\\"%s\\"' % board.get("name").replace('"', "")),
-        "__HDK_LINKIT_ASSIST_2502__"
+        ("ARDUINO_BOARD", '\\"%s\\"' % board.get("name").replace('"', ""))
     ],
 
     CPPPATH=[
