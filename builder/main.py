@@ -70,12 +70,11 @@ AlwaysBuild(target_size)
 #
 # Target: Reflash core for GSM devices
 #
-if board.get("build.mcu") in ["MT2502"]:
-    AlwaysBuild(
-        env.AddCustomTarget("reflash", None, [
-            env.VerboseAction("$REFLASH_CMD", "Reflashing core...")
-        ], title="Reflash Core Firmware",
-            description="Reflash module core firmware (Only available on windows)"))
+AlwaysBuild(
+    env.AddCustomTarget("reflash", None, [
+        env.VerboseAction("$REFLASH_CMD", "Reflashing core...")
+    ], title="Reflash Core Firmware",
+        description="Reflash module core firmware (Only available on windows)"))
 
 #
 # Target: Upload by default .bin file
@@ -96,12 +95,12 @@ upload_source = target_upload
 upload_actions = [env.VerboseAction("$UPLOADCMD", "Uploading $SOURCE")]
 
 if env.subst("$UPLOAD_PORT") == "":
-    if "windows" in get_systype() and board.get("build.mcu") in ["MT2502"]:
+    if "windows" in get_systype():
         env.Prepend(
             UPLOADERFLAGS=["-u"],
             REFLASH_FLAGS=["-u"],
         )
-    elif board.get("build.mcu") != "RDA8910":
+    else:
         upload_actions.insert(0, env.VerboseAction(env.AutodetectUploadPort,
                                                    "Looking for upload port..."))
 
