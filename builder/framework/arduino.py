@@ -94,6 +94,7 @@ env.Append(
         "-fno-exceptions",
         "-fno-use-cxa-atexit",
         "-fno-threadsafe-statics",
+        "-fno-non-call-exceptions"
     ],
 
     CPPDEFINES=[
@@ -104,7 +105,8 @@ env.Append(
         "ARDUINO_ARCH_ARM",
         ("ARDUINO_VARIANT", '\\"%s\\"' %
          board.get("build.variant").replace('"', "")),
-        ("ARDUINO_BOARD", '\\"%s\\"' % board.get("name").replace('"', ""))
+        ("ARDUINO_BOARD", '\\"%s\\"' % board.get("name").replace('"', "")),
+        "__HDK_LINKIT_ASSIST_2502__"
     ],
 
     CPPPATH=[
@@ -123,9 +125,7 @@ env.Append(
         "-nostdlib",
         "-nostartfiles",
         "-nodefaultlibs",
-        "-u", "main",
-        "-Wl,--defsym,platform_init=platform_%s_init" % board.get(
-            "build.variant")
+        "-u", "main"
     ],
 
     LIBPATH=[
@@ -155,12 +155,12 @@ env.Append(
 # Flags specific to MT2503/MT6261
 env.Prepend(
     CCFLAGS=[
-        "-march=armv5te",
+        "-march=arm7tdmi-s",
         "-mfloat-abi=soft",
     ],
 
     LINKFLAGS=[
-        "-march=armv5te",
+        "-march=arm7tdmi-s",
         "-mfloat-abi=soft",
         "-T", "linkerscript.ld",
     ],
