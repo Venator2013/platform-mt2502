@@ -72,7 +72,8 @@ env.Append(
         "-mlittle-endian",
         "-fvisibility=hidden",
         "-nostdlib",
-        "-ffreestanding"
+        "-ffreestanding",
+        "-nostartfiles"
     ],
 
     CFLAGS=[
@@ -87,7 +88,8 @@ env.Append(
         "-fno-use-cxa-atexit",
         "-fno-non-call-exceptions",
         "-nostdlib",
-        "-ffreestanding"
+        "-ffreestanding",
+        "-nostartfiles"
     ],
 
     CPPDEFINES=[
@@ -114,6 +116,7 @@ env.Append(
         "-Os",
         "-Wl,--gc-sections,--relax",
         "-nostdlib",
+        "-nostartfiles",
         "-Wl,--entry=gcc_entry"
     ],
 
