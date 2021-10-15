@@ -70,7 +70,8 @@ env.Append(
         "-mthumb-interwork",
         "-fpic",
         "-mlittle-endian",
-        "-fvisibility=hidden"
+        "-fvisibility=hidden",
+        "-nostdlib"
     ],
 
     CFLAGS=[
@@ -83,7 +84,8 @@ env.Append(
         "-fno-rtti",
         "-fno-exceptions",
         "-fno-use-cxa-atexit",
-        "-fno-non-call-exceptions"
+        "-fno-non-call-exceptions",
+        "-nostdlib"
     ],
 
     CPPDEFINES=[
@@ -109,8 +111,7 @@ env.Append(
         "-mthumb-interwork",
         "-Os",
         "-Wl,--gc-sections,--relax",
-        "-nostdlib",
-        "-u", "main"
+        "-nostdlib"
     ],
 
     LIBPATH=[
