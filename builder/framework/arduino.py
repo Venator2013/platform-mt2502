@@ -71,7 +71,6 @@ env.Append(
         "-fpic",
         "-mlittle-endian",
         "-fvisibility=hidden",
-        "-nostdlib",
         "-ffreestanding",
         "-nostartfiles",
         "-march=armv5te",
@@ -89,7 +88,6 @@ env.Append(
         "-fno-exceptions",
         "-fno-use-cxa-atexit",
         "-fno-non-call-exceptions",
-        "-nostdlib",
         "-ffreestanding",
         "-nostartfiles"
     ],
@@ -117,7 +115,6 @@ env.Append(
         "-mthumb-interwork",
         "-Os",
         "-Wl,--gc-sections",
-        "-nostdlib",
         "-nostartfiles",
         "-Wl,--entry=gcc_entry",
         "-march=armv5te",
