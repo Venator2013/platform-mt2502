@@ -149,7 +149,8 @@ env.Prepend(
     LINKFLAGS=[
         "-mcpu=arm7tdmi-s",
         "-mfloat-abi=soft",
-        "-T", "linkerscript.ld",
+        "-T", join(FRAMEWORK_DIR, "cores", board.get("build.core"),
+                   "mtk", "lib", "linkerscript.ld"),
     ],
 
     LIBS=[
