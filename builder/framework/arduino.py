@@ -69,12 +69,14 @@ env.Append(
         "-mthumb",
         "-mthumb-interwork",
         "-fpic",
+        "-fpie",
         "-mlittle-endian",
         "-fvisibility=hidden",
         "-ffreestanding",
         "-nostartfiles",
         "-march=armv5te",
         "-mfloat-abi=soft",
+        "-mno-unaligned-access"
     ],
 
     CFLAGS=[
@@ -89,7 +91,10 @@ env.Append(
         "-fno-use-cxa-atexit",
         "-fno-non-call-exceptions",
         "-ffreestanding",
-        "-nostartfiles"
+        "-nostartfiles",
+        "-mno-unaligned-access",
+        "-fpic",
+        "-fpie"
     ],
 
     CPPDEFINES=[
@@ -119,6 +124,7 @@ env.Append(
         "-Wl,--entry=gcc_entry",
         "-march=armv5te",
         "-mfloat-abi=soft",
+        "--specs=nano.specs",
         "-T", join(FRAMEWORK_DIR, "cores", board.get("build.core"),
                    "mtk", "lib", "linkerscript.ld"),
     ],
@@ -142,17 +148,6 @@ env.Append(
         )
     )
 )
-
-
-if board.get("build.newlib") == "nano":
-    env.Append(
-        LINKFLAGS=[
-            "--specs=nano.specs",
-            "-u", "_printf_float",
-            "-u", "_scanf_float",
-            "--specs=nosys.specs",
-        ]
-    )
 
 # copy CCFLAGS to ASFLAGS (-x assembler-with-cpp mode)
 env.Append(ASFLAGS=env.get("CCFLAGS", [])[:])
