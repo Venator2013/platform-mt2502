@@ -71,7 +71,8 @@ env.Append(
         "-fpic",
         "-mlittle-endian",
         "-fvisibility=hidden",
-        "-nostdlib"
+        "-nostdlib",
+        "-ffreestanding"
     ],
 
     CFLAGS=[
@@ -85,7 +86,8 @@ env.Append(
         "-fno-exceptions",
         "-fno-use-cxa-atexit",
         "-fno-non-call-exceptions",
-        "-nostdlib"
+        "-nostdlib",
+        "-ffreestanding"
     ],
 
     CPPDEFINES=[
