@@ -73,7 +73,9 @@ env.Append(
         "-fvisibility=hidden",
         "-nostdlib",
         "-ffreestanding",
-        "-nostartfiles"
+        "-nostartfiles",
+        "-march=armv5te",
+        "-mfloat-abi=soft",
     ],
 
     CFLAGS=[
@@ -117,7 +119,11 @@ env.Append(
         "-Wl,--gc-sections",
         "-nostdlib",
         "-nostartfiles",
-        "-Wl,--entry=gcc_entry"
+        "-Wl,--entry=gcc_entry",
+        "-march=armv5te",
+        "-mfloat-abi=soft",
+        "-T", join(FRAMEWORK_DIR, "cores", board.get("build.core"),
+                   "mtk", "lib", "linkerscript.ld"),
     ],
 
     LIBPATH=[
@@ -125,10 +131,7 @@ env.Append(
     ],
 
     LIBS=[
-        "c",
-        "gcc",
-        "m",
-        "stdc++"
+        "mtk"
     ],
 
     LIBSOURCE_DIRS=[
@@ -141,26 +144,6 @@ env.Append(
             suffix=".vpx"
         )
     )
-)
-
-
-# Flags specific to MT2503/MT6261
-env.Prepend(
-    CCFLAGS=[
-        "-march=armv5te",
-        "-mfloat-abi=soft",
-    ],
-
-    LINKFLAGS=[
-        "-march=armv5te",
-        "-mfloat-abi=soft",
-        "-T", join(FRAMEWORK_DIR, "cores", board.get("build.core"),
-                   "mtk", "lib", "linkerscript.ld"),
-    ],
-
-    LIBS=[
-        "mtk",
-    ],
 )
 
 
