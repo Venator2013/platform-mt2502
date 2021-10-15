@@ -111,7 +111,8 @@ env.Append(
         "-mthumb-interwork",
         "-Os",
         "-Wl,--gc-sections,--relax",
-        "-nostdlib"
+        "-nostdlib",
+        "-Wl,--entry=gcc_entry"
     ],
 
     LIBPATH=[
