@@ -114,7 +114,7 @@ env.Append(
         "-mthumb",
         "-mthumb-interwork",
         "-Os",
-        "-Wl,--gc-sections,--relax",
+        "-Wl,--gc-sections",
         "-nostdlib",
         "-nostartfiles",
         "-Wl,--entry=gcc_entry"
