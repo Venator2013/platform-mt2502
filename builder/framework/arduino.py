@@ -68,6 +68,9 @@ env.Append(
         "-Wall",
         "-mthumb",
         "-mthumb-interwork",
+        "-fpic",
+        "-mlittle-endian",
+        "-fvisibility=hidden"
     ],
 
     CFLAGS=[
@@ -106,10 +109,7 @@ env.Append(
         "-mthumb-interwork",
         "-Os",
         "-Wl,--gc-sections,--relax",
-        "-nostartfiles",
         "-nostdlib",
-        "-nostartfiles",
-        "-nodefaultlibs",
         "-u", "main"
     ],
 
