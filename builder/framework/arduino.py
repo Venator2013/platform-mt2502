@@ -144,12 +144,12 @@ env.Append(
 # Flags specific to MT2503/MT6261
 env.Prepend(
     CCFLAGS=[
-        "-mcpu=arm7tdmi-s",
+        "-march=armv5te",
         "-mfloat-abi=soft",
     ],
 
     LINKFLAGS=[
-        "-mcpu=arm7tdmi-s",
+        "-march=armv5te",
         "-mfloat-abi=soft",
         "-T", join(FRAMEWORK_DIR, "cores", board.get("build.core"),
                    "mtk", "lib", "linkerscript.ld"),
