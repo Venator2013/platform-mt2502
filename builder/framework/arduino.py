@@ -142,6 +142,7 @@ env.Append(
     ],
 
     LIBS=[
+        "m",
         "mtk"
     ],
 
