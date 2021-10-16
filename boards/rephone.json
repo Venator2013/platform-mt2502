@@ -1,9 +1,8 @@
 {
 	"build": {
 		"core": "mt2502",
-		"cpu": "arm7tdmi-s",
-		"f_cpu": "260000000L",
-		"mcu": "MT2502",
+		"f_cpu": "84000000L",
+		"mcu": "arm7tdmi-s",
 		"variant": "linkit_one",
 		"newlib": "nano",
 		"extra_flags": "-DPLATFORM_REPHONE=1 -D__HDK_LINKIT_ASSIST_2502__",

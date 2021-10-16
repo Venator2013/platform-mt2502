@@ -82,7 +82,7 @@ env.Append(
         "-fvisibility=hidden",
         "-ffreestanding",
         "-nostartfiles",
-        "-march=armv5te",
+        "-mcu=%s" % env.BoardConfig().get("build.mcu"),
         "-mfloat-abi=soft",
         "-mno-unaligned-access"
     ],
@@ -130,7 +130,7 @@ env.Append(
         "-Wl,--gc-sections",
         "-nostartfiles",
         "-Wl,--entry=gcc_entry",
-        "-march=armv5te",
+        "-mcu=%s" % env.BoardConfig().get("build.mcu"),
         "-mfloat-abi=soft",
         "--specs=nano.specs",
         "-T", join(FRAMEWORK_DIR, "cores", board.get("build.core"),
