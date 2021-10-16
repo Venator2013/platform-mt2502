@@ -38,7 +38,7 @@ def gen_vpx_file(target, source, env):
     env.Execute(env.VerboseAction(" ".join(cmd), " "))
 
     with open(target_firm.get_abspath(), "wb") as out_firm:
-        with open(target_firm.get_abspath(), "rb") as in_firm:
+        with open(temp_firm, "rb") as in_firm:
             buf = in_firm.read()
             # copy content
             out_firm.write(buf)
