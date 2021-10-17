@@ -5,7 +5,7 @@
 		"mcu": "arm7tdmi-s",
 		"variant": "linkit_one",
 		"newlib": "nano",
-		"extra_flags": "-DPLATFORM_REPHONE=1 -D__HDK_LINKIT_ASSIST_2502__",
+		"extra_flags": "-D__COMPILER_GCC__ -D__LINKIT_ONE__ -D__LINKIT_ONE_RELEASE__",
 		"hwids": [
 			[
 				"0x0E8D",
