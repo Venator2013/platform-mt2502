@@ -67,42 +67,34 @@ env.Append(
     ASFLAGS=["-x", "assembler-with-cpp"],
 
     CCFLAGS=[
-        "-Os",  # optimize for size
+        "-c",
         "-g",
-        "-fmessage-length=0",
-        "-ffunction-sections",  # place each function in its own section
-        "-fdata-sections",
-        "-fsigned-char",
-        "-Wall",
-        "-mthumb",
-        "-mthumb-interwork",
-        "-fpic",
-        "-fpie",
-        "-mlittle-endian",
+        "-O2",
         "-fvisibility=hidden",
-        "-ffreestanding",
-        "-nostartfiles",
+        "-fpic",
+        "-mthumb",
+        "-mlittle-endian",
+        "-nostdlib",
+        "-Dprintf=iprintf",
         "-mcpu=%s" % env.BoardConfig().get("build.mcu"),
-        "-mfloat-abi=soft",
-        "-mno-unaligned-access"
-    ],
 
-    CFLAGS=[
-        "-std=gnu11",
-        "-Wno-old-style-declaration"
     ],
 
     CXXFLAGS=[
-        "-std=gnu++11",
+        "-c",
+        "-g",
+        "-O2",
+        "-fvisibility=hidden",
+        "-fpic",
+        "-mthumb",
+        "-mlittle-endian",
+        "-nostdlib",
+        "-fno-non-call-exceptions",
         "-fno-rtti",
         "-fno-exceptions",
-        "-fno-use-cxa-atexit",
-        "-fno-non-call-exceptions",
-        "-ffreestanding",
-        "-nostartfiles",
-        "-mno-unaligned-access",
-        "-fpic",
-        "-fpie"
+        "-Dprintf=iprintf",
+        "-std=gnu++11",
+        "-fno-rtti"
     ],
 
     CPPDEFINES=[
@@ -124,14 +116,11 @@ env.Append(
     ],
 
     LINKFLAGS=[
-        "-mthumb",
-        "-mthumb-interwork",
-        "-Os",
         "-Wl,--gc-sections",
-        "-nostartfiles",
         "-Wl,--entry=gcc_entry",
         "-mcpu=%s" % env.BoardConfig().get("build.mcu"),
-        "-mfloat-abi=soft",
+        "-fpic",
+        "-pie",
         "--specs=nano.specs",
         "-T", join(FRAMEWORK_DIR, "cores", board.get("build.core"),
                    "mtk", "lib", "linkerscript.ld"),
