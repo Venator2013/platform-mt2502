@@ -3,7 +3,7 @@
 		"core": "mt2502",
 		"f_cpu": "84000000L",
 		"mcu": "arm7tdmi-s",
-		"variant": "linkit_one",
+		"variant": "rephone",
 		"extra_flags": "-D__COMPILER_GCC__ -D__LINKIT_ONE__ -D__LINKIT_ONE_RELEASE__",
 		"hwids": [
 			[
