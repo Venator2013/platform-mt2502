@@ -34,7 +34,13 @@ env.Replace(
     SIZEPRINTCMD='$SIZETOOL -B -d $SOURCES',
 
     PROGSUFFIX=".elf",
-    TARGETSUFFIX=".bin"
+    TARGETSUFFIX=".vxp"
+)
+
+# Setup tools based on system type
+env.Replace(
+    MTK_FLASHER='"$PYTHONEXE" ' +
+    join('tools', "uploader.py")
 )
 
 # Allow user to override via pre:script
@@ -67,25 +73,17 @@ target_size = env.Alias("size", target_elf, env.VerboseAction(
     "$SIZEPRINTCMD", "Calculating size $SOURCE"))
 AlwaysBuild(target_size)
 
-#
-# Target: Reflash core for GSM devices
-#
-AlwaysBuild(
-    env.AddCustomTarget("reflash", None, [
-        env.VerboseAction("$REFLASH_CMD", "Reflashing core...")
-    ], title="Reflash Core Firmware",
-        description="Reflash module core firmware (Only available on windows)"))
 
 #
 # Target: Upload by default .bin file
 #
 env.Replace(
-    UPLOADER="$LOGICROM_FLASHER",
+    UPLOADER="$MTK_FLASHER",
     UPLOADERFLAGS=[
-        "-b", "$UPLOAD_SPEED",
-        "-p", '"$UPLOAD_PORT"',
+        "-port", '"$UPLOAD_PORT"',
+        "-app", '$SOURCE'
     ],
-    UPLOADCMD='$UPLOADER $UPLOADERFLAGS $SOURCE'
+    UPLOADCMD='$UPLOADER $UPLOADERFLAGS'
 )
 
 for args in env.get("UPLOAD_EXTRA_ARGS", []):
@@ -95,14 +93,8 @@ upload_source = target_upload
 upload_actions = [env.VerboseAction("$UPLOADCMD", "Uploading $SOURCE")]
 
 if env.subst("$UPLOAD_PORT") == "":
-    if "windows" in get_systype():
-        env.Prepend(
-            UPLOADERFLAGS=["-u"],
-            REFLASH_FLAGS=["-u"],
-        )
-    else:
-        upload_actions.insert(0, env.VerboseAction(env.AutodetectUploadPort,
-                                                   "Looking for upload port..."))
+    upload_actions.insert(0, env.VerboseAction(env.AutodetectUploadPort,
+                                               "Looking for upload port..."))
 
 AlwaysBuild(env.Alias("upload", upload_source, upload_actions))
 
