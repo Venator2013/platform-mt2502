@@ -10,6 +10,9 @@ platform = env.PioPlatform()
 board = env.BoardConfig()
 
 
+flasher_path = platform.get_package_dir("framework-mt2502arduino") or ""
+
+
 def _get_board_mcu():
     return board.get("build.mcu")
 
@@ -40,7 +43,7 @@ env.Replace(
 # Setup tools based on system type
 env.Replace(
     MTK_FLASHER='"$PYTHONEXE" ' +
-    join('tools', "uploader.py")
+    join(flasher_path, 'tools', "uploader.py")
 )
 
 # Allow user to override via pre:script
