@@ -84,6 +84,7 @@ env.Replace(
     UPLOADER="$MTK_FLASHER",
     UPLOADERFLAGS=[
         "-port", '"$UPLOAD_PORT"',
+        "-verbose", '2'
         "-app", '$SOURCE'
     ],
     UPLOADCMD='$UPLOADER $UPLOADERFLAGS'
