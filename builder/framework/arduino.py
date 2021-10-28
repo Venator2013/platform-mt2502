@@ -125,8 +125,6 @@ env.Append(
         "-T", join(FRAMEWORK_DIR, "cores", board.get("build.core"),
                    "mtk", "lib", "linkerscript.ld"),
         "-Wl,--unresolved-symbols=report-all",
-        "-Wl,--warn-common",
-        "-Wl,--warn-unresolved-symbols"
     ],
 
     LIBPATH=[
