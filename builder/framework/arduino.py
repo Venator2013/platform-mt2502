@@ -8,10 +8,8 @@ kinds of creative coding, interactive objects, spaces or physical experiences.
 http://arduino.cc/en/Reference/HomePage
 """
 
-from os.path import abspath, isdir, isfile, join, dirname, getsize
+from os.path import isdir, join, dirname
 from os import remove
-from shutil import copyfile
-from hashlib import md5
 import struct
 
 from SCons.Script import DefaultEnvironment
