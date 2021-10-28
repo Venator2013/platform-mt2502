@@ -157,28 +157,38 @@ env.Append(ASFLAGS=env.get("CCFLAGS", [])[:])
 
 libs = []
 
+# add arduino lib first because of cycle dependencies between arduino framework and variant
+libs.append(env.BuildLibrary(
+    join("$BUILD_DIR", "FrameworkArduino"),
+    join(FRAMEWORK_DIR, "cores", board.get("build.core"))
+))
+
 variants_dir = join(FRAMEWORK_DIR, "variants")
 
 if "build.variants_dir" in env.BoardConfig():
     variants_dir = join(
         "$PROJECT_DIR", env.BoardConfig().get("build.variants_dir"))
 
+
 if "build.variant" in env.BoardConfig():
     env.Append(
         CPPPATH=[
             join(variants_dir, env.BoardConfig().get("build.variant"))
-        ]
+        ],
+        LIBPATH=[
+            join(variants_dir, env.BoardConfig().get("build.variant"))
+        ],
     )
     libs.append(env.BuildLibrary(
         join("$BUILD_DIR", "FrameworkArduinoVariant"),
         join(variants_dir, env.BoardConfig().get("build.variant"))
     ))
 
-envsafe = env.Clone()
 
-libs.append(envsafe.BuildLibrary(
+libs.append(env.BuildLibrary(
     join("$BUILD_DIR", "FrameworkArduino"),
     join(FRAMEWORK_DIR, "cores", board.get("build.core"))
 ))
+
 
 env.Prepend(LIBS=libs)
