@@ -52,18 +52,16 @@ def gen_vpx_file(target, source, env):
                 out_firm.write(b'\x30')
                 firm_size += 1
 
+            out_firm.write(suffix)
             # add elf file length information
             lengthinfo = struct.pack('qi', firm_size, 0)
             out_firm.write(lengthinfo)
-            out_firm.write(suffix)
         out_firm.close()
         remove(temp_firm)
 
 
 # Setup ENV
 env.Append(
-    ASFLAGS=["-x", "assembler-with-cpp"],
-
     CCFLAGS=[
         "-c",
         "-g",
@@ -74,7 +72,7 @@ env.Append(
         "-mlittle-endian",
         "-nostdlib",
         "-Dprintf=iprintf",
-        "-mcpu=%s" % env.BoardConfig().get("build.mcu"),
+        "-mcpu=%s" % env.BoardConfig().get("build.mcu")
 
     ],
 
@@ -119,10 +117,12 @@ env.Append(
         "-mcpu=%s" % env.BoardConfig().get("build.mcu"),
         "-fpic",
         "-pie",
-        "--specs=nano.specs",
+        "--specs=nosys.specs",
         "-T", join(FRAMEWORK_DIR, "cores", board.get("build.core"),
                    "mtk", "lib", "linkerscript.ld"),
         "-Wl,--unresolved-symbols=report-all",
+        "-ffreestanding",
+        "-nostartfiles",
     ],
 
     LIBPATH=[
@@ -145,9 +145,6 @@ env.Append(
         )
     )
 )
-
-# copy CCFLAGS to ASFLAGS (-x assembler-with-cpp mode)
-env.Append(ASFLAGS=env.get("CCFLAGS", [])[:])
 
 #
 # Target: Build Core Library
