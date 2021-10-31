@@ -64,33 +64,22 @@ def gen_vpx_file(target, source, env):
 env.Append(
     CCFLAGS=[
         "-c",
-        "-g",
         "-O2",
         "-fvisibility=hidden",
         "-fpic",
         "-mthumb",
         "-mlittle-endian",
-        "-nostdlib",
-        "-Dprintf=iprintf",
         "-mcpu=%s" % env.BoardConfig().get("build.mcu")
-
     ],
 
     CXXFLAGS=[
         "-c",
-        "-g",
         "-O2",
         "-fvisibility=hidden",
         "-fpic",
         "-mthumb",
         "-mlittle-endian",
-        "-nostdlib",
-        "-fno-non-call-exceptions",
-        "-fno-rtti",
-        "-fno-exceptions",
-        "-Dprintf=iprintf",
-        "-std=gnu++11",
-        "-fno-rtti"
+        "-mcpu=%s" % env.BoardConfig().get("build.mcu"),
     ],
 
     CPPDEFINES=[
