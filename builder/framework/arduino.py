@@ -112,17 +112,22 @@ env.Append(
     ],
 
     LINKFLAGS=[
-        "-Wl,--gc-sections",
-        "-Wl,--entry=gcc_entry",
         "-mcpu=%s" % env.BoardConfig().get("build.mcu"),
+        "-mthumb",
+        "-mlittle-endian",
+        "-O2",
+        "-Wl,--gc-sections",
+        "--specs=nosys.specs",
         "-fpic",
         "-pie",
-        "--specs=nosys.specs",
+        "-Wl,-Map=%s.map" % env.get("PROGNAME"),
+        "-Wl,--entry=gcc_entry",
+        "-Wl,--unresolved-symbols=report-all",
+        "-Wl,--warn-common",
+        "-Wl,--warn-unresolved-symbols",
         "-T", join(FRAMEWORK_DIR, "cores", board.get("build.core"),
                    "mtk", "lib", "linkerscript.ld"),
-        "-Wl,--unresolved-symbols=report-all",
-        "-ffreestanding",
-        "-nostartfiles",
+
     ],
 
     LIBPATH=[
