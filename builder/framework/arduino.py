@@ -114,7 +114,7 @@ env.Append(
         "--specs=nosys.specs",
         "-fpic",
         "-pie",
-        "-Wl,-Map=%s.map" % env.get("PROGNAME"),
+        "-Wl,-Map=%s" % join("$BUILD_DIR", "${PROGNAME}.map"),
         "-Wl,--entry=gcc_entry",
         "-Wl,--unresolved-symbols=report-all",
         "-Wl,--warn-common",
