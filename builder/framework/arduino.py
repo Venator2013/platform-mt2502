@@ -70,7 +70,7 @@ env.Append(
         "-mthumb",
         "-mlittle-endian",
         "-mcpu=%s" % env.BoardConfig().get("build.mcu"),
-        "-Dprintf=iprintf"
+   #     "-Dprintf=iprintf"
     ],
 
     CXXFLAGS=[
@@ -84,7 +84,7 @@ env.Append(
         "-fno-non-call-exceptions",
         "-fno-rtti",
         "-fno-exceptions",
-        "-Dprintf=iprintf"
+       # "-Dprintf=iprintf"
     ],
 
     CPPDEFINES=[
